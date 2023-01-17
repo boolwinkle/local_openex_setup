@@ -5,8 +5,6 @@ with all the components deployed trough docker-compose.
 
 The ```docker-compose.yml``` file provided in this project uses the official Openex 
 docker image, along with its dependencies: PostgreSQL and MinIO.
-About configuring this part of docker-compose you can read
-[here](https://github.com/OpenEx-Platform/docker).
 
 For the mail server, docker-compose runs 
 [this](https://github.com/docker-mailserver/docker-mailserver)
@@ -33,7 +31,11 @@ $ cp .env.sample .env
 ```
 
 Now, in a text editor of your choice, edit the variables marked ```changeMe```.
-These are used to access the PostgreSQL database and MinIO. If you must change the 
+These are used to access the PostgreSQL database and MinIO. 
+About configuring this part of docker-compose you can read
+[here](https://github.com/OpenEx-Platform/docker).
+
+If you must change the 
 ```MAIL_DOMAIN``` 
 variable, make sure to change it in every environment variable where it appears, 
 and in ```populate_mailserver.sh```.
@@ -52,13 +54,14 @@ Now, in a text editor of your choice, add to ```players.txt``` lines with space
 separated values for username and mail password. The bash script will add
 ```@openex.local``` to the username, so for example, if you want to add 
 ```matko@openex.local``` to the mail server, to ```players.txt``` you should append
-```matko mpass1234```.
+```matko some_password```.
 
 Feel free to overwrite any line
 except for the first one, ```admin adminpass```. That one is used by the Openex
 Platform to log into the mail server.
 
-Now, when you run docker-compose, you will be able to populate it with mails.
+Now, when you run docker-compose, you will be able to populate it with mails,
+using the ```populate_mailserver.sh``` script.
 
 ### Mail client setup
 #### Incoming server
@@ -94,3 +97,4 @@ Openex will now be available at [```http://localhost:8080```](http://localhost:8
 Login credentials:
  - mail: admin@openex.io
  - password: admin
+
