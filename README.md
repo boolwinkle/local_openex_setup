@@ -98,3 +98,4 @@ Login credentials:
  - mail: admin@openex.io
  - password: admin
 
+ You can now add players with addresses from the mailserver. 
