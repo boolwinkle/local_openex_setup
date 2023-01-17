@@ -1,2 +1,6 @@
 admin adminpass
 stefica steficapass
+matko matkopass
+stribor striborpass
+emily emilypass
+mark markpass
