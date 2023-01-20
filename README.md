@@ -40,9 +40,12 @@ If you must change the
 variable, make sure to change it in every environment variable where it appears, 
 and in ```populate_mailserver.sh```.
 
-## Adding dummy players
-This section is optional, you can manually add players using the ```setup.sh```. 
+## Adding dummy emails
+This section is optional, you can manually add email addresses to the mailserver using the ```setup.sh```. 
 Instructions [here](https://github.com/docker-mailserver/docker-mailserver#get-up-and-running).
+
+**IMPORTANT:** this will NOT add players to OpenEx, it will only add email adrresses to the mailserver. Adding players to OpenEx is a WIP.
+
 
 Copy the ```sample_players.txt``` to ```players.txt``` which the 
 ```populate_mailserver.sh``` will read.
@@ -99,3 +102,5 @@ Login credentials:
  - password: admin
 
  You can now add players with addresses from the mailserver. 
+
+
