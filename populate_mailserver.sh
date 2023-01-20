@@ -8,7 +8,7 @@ do
     arr=($line)
     mail="${arr[0]}@$mail_domain"
     password=${arr[1]}
-
+    echo "Adding ${mail} with password ${password}" 
     bash ./setup.sh email add $mail $password
 
 done < $players_file
