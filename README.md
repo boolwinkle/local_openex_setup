@@ -101,6 +101,8 @@ Login credentials:
  - mail: admin@openex.io
  - password: admin
 
+After logging in for the first time, go to ```http://localhost:8080/admin/profile``` abd change the email address to admin@openex.local
+
  You can now add players with addresses from the mailserver. 
 
 
