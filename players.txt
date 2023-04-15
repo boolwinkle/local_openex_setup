@@ -1,2 +1,4 @@
 admin adminpass
-stefica steficapass
+vatric vatricpass
+stuki stukipass
+svenko svenkopass
