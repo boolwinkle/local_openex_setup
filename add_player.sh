@@ -13,7 +13,7 @@ add_player(){
     done
 	data=$(echo "{ ${parsed_args[@]} \"user_admin\": false }")
 	echo $data
-	curl -X POST http://localhost:8080/api/users --verbose \
+	curl -X POST http://localhost:8080/api/users \
 		--header "Content-Type: application/json" \
 		--header "Authorization: Bearer b846fb94-5656-43b6-a8ac-5c6101a6b041" \
 		--data "$data"
