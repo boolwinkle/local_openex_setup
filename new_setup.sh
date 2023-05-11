@@ -19,6 +19,8 @@ get_email(){
 		firstname=$3
 		lastname=$4
 		email="$firstname.$lastname@$mail_domain"
+	else
+		email="$email@$mail_domain"
 	fi
 
 	echo $email
