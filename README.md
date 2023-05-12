@@ -37,13 +37,13 @@ You can read more about configuring this part of docker-compose
 If you must change the 
 ```MAIL_DOMAIN``` 
 variable, make sure to change it in every environment variable where it appears, 
-and in ```player_setup.sh```.
+and in ```players_setup.sh```.
 
 ## Adding players
 This section is optional, you can manually add email addresses to the mailserver using the ```setup.sh```, and players with Openex GUI or API. 
 Instructions for mailserver [here](https://github.com/docker-mailserver/docker-mailserver#get-up-and-running).
 
-Edit ```players.txt``` file which the ```player_setup.sh``` will read from. The first line is a comment showing what each column represents. If you want to leave some columns empty, write ```-``` (minus). Each row represents one player. 
+Edit ```players.txt``` file which the ```players_setup.sh``` will read from. The first line is a comment showing what each column represents. If you want to leave some columns empty, write ```-``` (minus). Each row represents one player. 
 
 Email address which will be used for a player is derived from email, username, or name and surname, in that order of priority. Example: if a player has specified email address, that will be user for their email. If a player doesn't have email address specified, but has username, their email will be ```username@openex.local```, and so on. If specifying email, only put what is in front of ```@openex.local```. Example, if you want a player to have the email ```management@openex.local```, under email you should only put ```management```. 
 
@@ -56,7 +56,7 @@ $ sudo docker-compose up -d
 
 Before adding players, you will need to login to OpenEx at [```http://localhost:8080```](http://localhost:8080/) (see credentials lower) and navigate to the profile page (upper right corner) and find the API access key. Copy it and paste in ```curl``` in ```players_setup.sh```.
 
-Now, to add the players you specified, run ```bash new_setup.sh```. This will call the ```setup.sh``` script to add players to the mailserver, and OpenEx API to add them to OpenEx.
+Now, to add the players you specified, run ```bash players_setup.sh```. This will call the ```setup.sh``` script to add players to the mailserver, and OpenEx API to add them to OpenEx.
 
 To the mailserver, you should add the email that OpenEx will use to contact players. The credentials are in ```.env``` variables ```SPRING_MAIL_USERNAME``` and 
 ```SPRING_MAIL_PASSWORD```, so for example: ```bash setup.sh email add admin@openex.local adminpass```.
