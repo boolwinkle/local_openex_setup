@@ -1,5 +1,0 @@
-#username       email           		firstname       lastname        organization        password
-NurseJoy        nursing                 Joy             -               -                   nursingpass
-Giovanni        management              Giovanni        -               -                   mgmtpass
-ProfOak         physicians              Oak             -               -                   docpass
-BugCatcher      it						Josh            -               -                   itpass

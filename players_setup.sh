@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mail_domain="openex.local"
-players_file="sample_new_player.txt"
+players_file="players.txt"
 
 add_email(){
 	email=$(get_email $"$@")

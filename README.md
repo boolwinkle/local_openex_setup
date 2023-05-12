@@ -1,4 +1,3 @@
-
 # Local Openex Setup
 This repository provides everything for a quick setup of the Openex platform,
 with all the components deployed through docker-compose.
@@ -10,8 +9,7 @@ For the mail server, docker-compose runs
 [this](https://github.com/docker-mailserver/docker-mailserver)
 production-ready but simple mail server. The project also contains a convenient
 bash script for populating the mail server with dummy users. Checking mail has to
-be done through a mail client like Thunderbird, with configured incoming and outgoing
-servers to the docker-mailserver.
+be done through a mail client like Thunderbird, with configured incoming and outgoing servers to the docker-mailserver.
 
 ## Pre-requisites
 You will need to install docker-compose for your operating system.
@@ -35,49 +33,19 @@ These are used to access the PostgreSQL database and MinIO.
 You can read more about configuring this part of docker-compose
 [here](https://github.com/OpenEx-Platform/docker).
 
+
 If you must change the 
 ```MAIL_DOMAIN``` 
 variable, make sure to change it in every environment variable where it appears, 
-and in ```populate_mailserver.sh```.
+and in ```player_setup.sh```.
 
-## Adding dummy emails
-This section is optional, you can manually add email addresses to the mailserver using the ```setup.sh```. 
-Instructions [here](https://github.com/docker-mailserver/docker-mailserver#get-up-and-running).
+## Adding players
+This section is optional, you can manually add email addresses to the mailserver using the ```setup.sh```, and players with Openex GUI or API. 
+Instructions for mailserver [here](https://github.com/docker-mailserver/docker-mailserver#get-up-and-running).
 
-**IMPORTANT:** this will NOT add players to OpenEx, it will only add email adrresses to the mailserver. Adding players to OpenEx is a WIP.
+Edit ```players.txt``` file which the ```player_setup.sh``` will read from. The first line is a comment showing what each column represents. If you want to leave some columns empty, write ```-``` (minus). Each row represents one player. 
 
-
-Copy the ```sample_players.txt``` to ```players.txt``` which the 
-```populate_mailserver.sh``` will read.
-```
-$ cp sample_players.txt players.txt
-```
-
-Now, in a text editor of your choice, add lines to ```players.txt``` with space-separated 
-values for username and mail password. The bash script will add
-```@openex.local``` to the username, so for example, if you want to add 
-```matko@openex.local``` to the mail server, to ```players.txt``` you should append
-```matko some_password```.
-
-Feel free to overwrite any line
-except for the first one, ```admin adminpass```. That one is used by the Openex
-Platform to log into the mail server.
-
-Now, when you run docker-compose, you will be able to populate it with mails,
-using the ```populate_mailserver.sh``` script.
-
-### Mail client setup
-#### Incoming server
-Set the server type to IMAP and listening to the port 143.
-Set the server name/address to localhost.
-
-#### Outgoing server
-Set the server type to SMTP and listening to the port 25.
-Set the server name/address to localhost.
-
-
-On both servers, set the security settings to the lowest. This shouldn't be risky on home
-networks.
+Email address which will be used for a player is derived from email, username, or name and surname, in that order of priority. Example: if a player has specified email address, that will be user for their email. If a player doesn't have email address specified, but has username, their email will be ```username@openex.local```, and so on. If specifying email, only put what is in front of ```@openex.local```. Example, if you want a player to have the email ```management@openex.local```, under email you should only put ```management```. 
 
 
 ## Running
@@ -85,24 +53,38 @@ To run docker-compose, use the following command:
 ```
 $ sudo docker-compose up -d
 ```
-If you're runnig the mail server for the first time, you must add at least one
-mail address. Do so by running:
-```$ bash populate_mailserver.sh```, or add some manually. More detailed instructions
-can be found
-[here](https://github.com/docker-mailserver/docker-mailserver#starting-for-the-first-time).
+
+Before adding players, you will need to login to OpenEx at [```http://localhost:8080```](http://localhost:8080/) (see credentials lower) and navigate to the profile page (upper right corner) and find the API access key. Copy it and paste in ```curl``` in ```players_setup.sh```.
+
+Now, to add the players you specified, run ```bash new_setup.sh```. This will call the ```setup.sh``` script to add players to the mailserver, and OpenEx API to add them to OpenEx.
+
+To the mailserver, you should add the email that OpenEx will use to contact players. The credentials are in ```.env``` variables ```SPRING_MAIL_USERNAME``` and 
+```SPRING_MAIL_PASSWORD```, so for example: ```bash setup.sh email add admin@openex.local adminpass```.
+
+### Mail client setup
+
+For convenience, you can edit your ```/etc/hosts``` file and add the line ```127.0.0.1 .openex.local```. This will make it easier for local testing, as Thunderbird will assume this to be the mailserver address.
+
+#### Incoming server
+Set the server type to IMAP and listening to the port 143.
+
+#### Outgoing server
+Set the server type to SMTP and listening to the port 25.
+
+
+On both servers, set the security settings to the lowest. This shouldn't be risky on home networks.
 
 Now, if done correctly, you should be able to login to some mail added
-to the mail server. To check if everything is working as expected, try to send yourself
-a mail.
+to the mail server. To check if everything is working as expected, try to send yourself an email.
 
-Openex will now be available at [```http://localhost:8080```](http://localhost:8080/).
+###  OpenEx website
+
+Openex will be available at [```http://localhost:8080```](http://localhost:8080/).
 
 Login credentials:
- - mail: admin@openex.io
- - password: admin
+- mail: admin@openex.io
+- password: admin
 
-After logging in for the first time, go to ```http://localhost:8080/admin/profile``` abd change the email address to admin@openex.local
+Login credentials can be changed in OpenEx settings.
 
- You can now add players with addresses from the mailserver. 
-
-
+After logging in for the first time, go to ```http://localhost:8080/admin/profile``` and change the email address to admin@openex.local
