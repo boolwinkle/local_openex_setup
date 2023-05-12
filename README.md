@@ -86,5 +86,3 @@ Login credentials:
 - password: admin
 
 Login credentials can be changed in OpenEx settings.
-
-After logging in for the first time, go to ```http://localhost:8080/admin/profile``` and change the email address to admin@openex.local
