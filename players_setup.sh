@@ -6,7 +6,7 @@ players_file="players.txt"
 add_email(){
 	email=$(get_email $"$@")
 	password=$6
-	bash ./setup.sh email add $email $password
+	bash ./mail_setup.sh email add $email $password
 }
 
 get_email(){
@@ -40,7 +40,7 @@ add_player(){
 		
 		arg_str+="$field=${fields[$field]} "
 	done	
-	bash ./add_player.sh $arg_str
+	bash ./add_player_openex.sh $arg_str
 }
 
 while read -r line; do
